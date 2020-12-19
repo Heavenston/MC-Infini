@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.21'
+}
+
+group 'fr.heav'
+version '0.1.0'
+
+repositories {
+    mavenCentral()
+
+    maven { url 'https://repo.spongepowered.org/maven' }
+    maven { url 'https://libraries.minecraft.net' }
+    maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+
+    compile 'com.github.Minestom:Minestom:c7876d648c'
+}
