@@ -12,6 +12,7 @@ import net.minestom.server.instance.InstanceContainer
 import net.minestom.server.instance.block.Block
 import net.minestom.server.scoreboard.Sidebar
 import net.minestom.server.utils.BlockPosition
+import net.minestom.server.utils.Position
 import net.minestom.server.utils.time.TimeUnit
 import net.minestom.server.world.DimensionType
 import java.util.*
@@ -34,6 +35,10 @@ class JumpLevel(val n: Int): InstanceContainer(UUID.randomUUID(), DimensionType.
         parkourGenerator.step(Block.GREEN_WOOL)
         end = parkourGenerator.getCurrentPosition()
         this.setBlock(start, Block.GREEN_WOOL)
+    }
+
+    override fun isInVoid(position: Position): Boolean {
+        return position.y < 14
     }
 }
 
