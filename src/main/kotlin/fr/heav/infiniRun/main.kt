@@ -114,6 +114,5 @@ fun main() {
 
     }
 
-    // Start the server on port 25565
-    minecraftServer.start("localhost", 25565)
+    minecraftServer.start("0.0.0.0", 25565)
 }

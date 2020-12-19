@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.4.21'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
 group 'fr.heav'
@@ -12,6 +13,12 @@ repositories {
     maven { url 'https://repo.spongepowered.org/maven' }
     maven { url 'https://libraries.minecraft.net' }
     maven { url 'https://jitpack.io' }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'fr.heav.infiniRun.MainKt'
+    }
 }
 
 dependencies {
