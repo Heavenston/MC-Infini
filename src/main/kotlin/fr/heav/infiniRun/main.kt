@@ -95,7 +95,9 @@ fun main() {
                     ))
                     sidebar.updateLineContent("level", ColoredText.of(ChatColor.CYAN, "Level ").append(ChatColor.WHITE, "${currentLevel + 1}"))
                     player.setInstance(level, level.start.toPosition().clone().add(0f, 1f, 0f))
-                    player.respawn()
+                    schedulerManager.buildTask {
+                        player.respawn()
+                    }.delay(2, TimeUnit.TICK).schedule()
                     playerLevels[player.uuid] = currentLevel
                 }
                 else {
