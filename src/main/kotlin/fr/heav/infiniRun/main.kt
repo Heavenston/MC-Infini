@@ -99,9 +99,12 @@ fun main() {
                             "Congrats on passing level ${level.n} ! Welcome to level ${level.n + 1}",
                     ))
                     sidebar.updateLineContent("level", ColoredText.of(ChatColor.CYAN, "Level ").append(ChatColor.WHITE, "${currentLevel + 1}"))
-                    player.setInstance(level, level.start.toPosition().clone().add(0f, 1f, 0f))
+                    player.respawnPoint = level.start.toPosition().clone().add(0f, 1f, 0f)
+                    player.setInstance(level, player.respawnPoint)
+                    player.teleport(player.respawnPoint)
                     schedulerManager.buildTask {
                         player.respawn()
+                        player.teleport(player.respawnPoint)
                     }.delay(2, TimeUnit.TICK).schedule()
                     playerLevels[player.uuid] = currentLevel
                 }
