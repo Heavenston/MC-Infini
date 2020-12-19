@@ -59,8 +59,14 @@ fun main() {
                 levelIndex += 1
                 PlayerLevelStore.store(player, levelIndex)
                 val newLevel = LevelManager.getLevel(levelIndex)
-                player.setInstance(newLevel, player.position)
+                newLevel.loadChunk(player.position, null)
                 player.respawnPoint = newLevel.start.toPosition().add(0f, 1f, 0f)
+                val newPos = player.respawnPoint.clone()
+                newPos.yaw = player.position.yaw
+                newPos.pitch = player.position.pitch
+                newPos.x += player.position.x - floor(player.position.x)
+                newPos.z += player.position.z - floor(player.position.z)
+                player.setInstance(newLevel, newPos)
             }
         }.repeat(3, TimeUnit.TICK).schedule()
     }

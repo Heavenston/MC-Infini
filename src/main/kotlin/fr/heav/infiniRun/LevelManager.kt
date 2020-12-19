@@ -10,16 +10,10 @@ object LevelManager {
     fun getLevel(i: Int): LevelInstance {
         if (levels.size > i)
             return levels[i]
-        val start: BlockPosition = if (i == 0) {
-            BlockPosition(0, 15, 0)
-        }
-        else {
-            getLevel(i - 1).end.clone()
-        }
         val instance = LevelInstance(
                 i.toLong(),
-                start,
-                (i / 2) + 3
+                BlockPosition(i * 1000, 15, 0),
+                (i / 2) + 5
         )
         MinecraftServer.getInstanceManager().registerInstance(instance)
         levels.add(i, instance)
