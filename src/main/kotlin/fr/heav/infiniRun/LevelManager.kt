@@ -13,7 +13,8 @@ object LevelManager {
         val instance = LevelInstance(
                 i.toLong(),
                 BlockPosition(i * 1000, 15, 0),
-                (i / 2) + 5
+                (i / 2) + 5,
+            lambsDimensionType[i % lambsDimensionType.size]
         )
         MinecraftServer.getInstanceManager().registerInstance(instance)
         levels.add(i, instance)

@@ -11,7 +11,7 @@ import net.minestom.server.world.DimensionType
 import java.util.*
 import kotlin.math.absoluteValue
 
-class LevelInstance(seed: Long, start: BlockPosition, size: Int): InstanceContainer(UUID.randomUUID(), DimensionType.OVERWORLD, null) {
+class LevelInstance(seed: Long, start: BlockPosition, size: Int, dimensionType: DimensionType): InstanceContainer(UUID.randomUUID(), dimensionType, null) {
     val start = start.clone()
     val end: BlockPosition
 

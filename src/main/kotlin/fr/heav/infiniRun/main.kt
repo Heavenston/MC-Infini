@@ -11,6 +11,10 @@ import net.minestom.server.event.player.PlayerLoginEvent
 import net.minestom.server.event.player.PlayerSpawnEvent
 import net.minestom.server.instance.InstanceContainer
 import net.minestom.server.instance.block.Block
+import net.minestom.server.listener.manager.PacketController
+import net.minestom.server.network.packet.server.ServerPacket
+import net.minestom.server.network.packet.server.play.ChunkDataPacket
+import net.minestom.server.network.packet.server.play.UnloadChunkPacket
 import net.minestom.server.scoreboard.Sidebar
 import net.minestom.server.utils.BlockPosition
 import net.minestom.server.utils.Position
