@@ -24,5 +24,5 @@ jar {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
 
-    compile 'com.github.Minestom:Minestom:c7876d648c'
+    compile 'com.github.Minestom:Minestom:2a78851ab4'
 }
