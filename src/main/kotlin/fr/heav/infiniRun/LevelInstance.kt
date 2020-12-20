@@ -11,8 +11,8 @@ import net.minestom.server.world.DimensionType
 import java.util.*
 import kotlin.math.absoluteValue
 
-class LevelInstance(seed: Long, start: BlockPosition, size: Int, dimensionType: DimensionType): InstanceContainer(UUID.randomUUID(), dimensionType, null) {
-    val start = start.clone()
+class LevelInstance(parkourConfig: ParkourGeneratorConfig, size: Int, dimensionType: DimensionType): InstanceContainer(UUID.randomUUID(), dimensionType, null) {
+    val start = parkourConfig.startPosition.clone()
     val end: BlockPosition
 
     init {
@@ -21,7 +21,7 @@ class LevelInstance(seed: Long, start: BlockPosition, size: Int, dimensionType: 
         this.timeRate = 0
         this.time = 18000
         this.loadChunk(start.toPosition(), null)
-        val parkourGenerator = ParkourGenerator(this, start, Vec2d(1.0, 0.0), seed)
+        val parkourGenerator = ParkourGenerator(this, parkourConfig)
         for (i in 0..size) {
             parkourGenerator.step(Block.BONE_BLOCK)
         }

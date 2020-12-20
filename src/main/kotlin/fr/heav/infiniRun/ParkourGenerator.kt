@@ -16,15 +16,23 @@ private fun rotate2DVec(vec: Vec2d, angle: Double) {
     vec.y = sa * x + ca * y
 }
 
-class ParkourGenerator(val instance: Instance, startPosition: BlockPosition, direction: Vec2d = Vec2d(1.0, 0.0), seed: Long = Random.nextLong()) {
+data class ParkourGeneratorConfig (
+    val seed: Long,
+    val startPosition: BlockPosition,
+    val direction: Vec2d,
+    val heightChange: Boolean,
+    val fiveBlockDistanceProbability: Double = 0.0,
+)
+
+class ParkourGenerator(val instance: Instance, val config: ParkourGeneratorConfig) {
     private val currentPosition: BlockPosition = BlockPosition(
-            startPosition.x,
-            startPosition.y,
-            startPosition.z,
+        config.startPosition.x,
+        config.startPosition.y,
+        config.startPosition.z,
     )
-    private val direction: Vec2d = Vec2d(1.0, 0.0)
+    private val direction: Vec2d = Vec2d(config.direction)
     private var currentRotation: Double = 0.0
-    private val random = Random(seed)
+    private val random = Random(config.seed)
 
     fun step(block: Block) {
         currentRotation += random.nextDouble(-PI / 10, PI / 10)
@@ -34,9 +42,18 @@ class ParkourGenerator(val instance: Instance, startPosition: BlockPosition, dir
         val move = Vec2d(direction)
         rotate2DVec(move, currentRotation)
         move.normalize()
-        move.mul(random.nextDouble(3.0, 5.0))
+
+        val heightChange = Random.nextInt(0, if (config.heightChange) 2 else 1)
+        val gapSize = if (heightChange == 1) {
+            random.nextDouble(3.0, 5.0)
+        }
+        else {
+            random.nextDouble(3.0, 4.0)
+        }
+        move.mul(gapSize)
         currentPosition.x += move.x.toInt()
         currentPosition.z += move.y.toInt()
+        currentPosition.y += heightChange
 
         instance.setBlock(currentPosition, block)
     }
