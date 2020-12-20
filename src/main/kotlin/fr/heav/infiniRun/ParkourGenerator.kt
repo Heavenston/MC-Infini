@@ -34,9 +34,9 @@ class ParkourGenerator(val instance: Instance, startPosition: BlockPosition, dir
         val move = Vec2d(direction)
         rotate2DVec(move, currentRotation)
         move.normalize()
-        move.mul(random.nextDouble(2.0, 4.4))
-        currentPosition.x += move.x.roundToInt()
-        currentPosition.z += move.y.roundToInt()
+        move.mul(random.nextDouble(3.0, 5.0))
+        currentPosition.x += move.x.toInt()
+        currentPosition.z += move.y.toInt()
 
         instance.setBlock(currentPosition, block)
     }

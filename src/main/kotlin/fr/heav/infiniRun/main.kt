@@ -25,13 +25,13 @@ import java.util.*
 import kotlin.math.*
 
 object PlayerLevelStore {
-    private val playerLevels = mutableMapOf<UUID, Int>()
+    private val playerLevels = mutableMapOf<String, Int>()
 
     fun store(player: Player, level: Int) {
-        playerLevels[player.uuid] = level
+        playerLevels[player.username] = level
     }
     fun load(player: Player): Int {
-        return playerLevels.getOrDefault(player.uuid, 0)
+        return playerLevels.getOrDefault(player.username, 0)
     }
 }
 
