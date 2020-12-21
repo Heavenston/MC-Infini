@@ -4,18 +4,13 @@ import net.minestom.server.MinecraftServer
 import net.minestom.server.entity.GameMode
 import net.minestom.server.event.player.PlayerLoginEvent
 import net.minestom.server.utils.time.TimeUnit
-import net.minestom.server.world.biomes.Biome
 import kotlin.math.*
 
 fun main() {
     val minecraftServer = MinecraftServer.init()
 
-    val biomeManager = MinecraftServer.getBiomeManager();
+    val biomeManager = MinecraftServer.getBiomeManager()
     biomeManager.addBiome(lambsBiome)
-
-    val transitionInstance = MinecraftServer.getInstanceManager().createInstanceContainer()
-    transitionInstance.chunkGenerator = VoidChunkGenerator(Biome.PLAINS)
-    transitionInstance.enableAutoChunkLoad(true)
 
     val globalEventHandler = MinecraftServer.getGlobalEventHandler()
     globalEventHandler.addEventCallback(
