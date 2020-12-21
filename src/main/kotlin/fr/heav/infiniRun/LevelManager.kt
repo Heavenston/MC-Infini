@@ -6,11 +6,11 @@ import net.minestom.server.utils.BlockPosition
 import kotlin.math.max
 
 object LevelManager {
-    private val levels = mutableListOf<LevelInstance>()
+    private val levels = mutableMapOf<Int, LevelInstance>()
 
     fun getLevel(i: Int): LevelInstance {
-        if (levels.size > i)
-            return levels[i]
+        if (levels.containsKey(i))
+            return levels[i]!!
 
         val parkourConfig = ParkourGeneratorConfig(
             seed = i.toLong(),
@@ -26,7 +26,7 @@ object LevelManager {
             lambsDimensionType[i % lambsDimensionType.size]
         )
         MinecraftServer.getInstanceManager().registerInstance(instance)
-        levels.add(i, instance)
+        levels[i] = instance
         return instance
     }
 }
