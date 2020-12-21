@@ -24,17 +24,6 @@ import net.minestom.server.world.biomes.Biome
 import java.util.*
 import kotlin.math.*
 
-object PlayerLevelStore {
-    private val playerLevels = mutableMapOf<String, Int>()
-
-    fun store(player: Player, level: Int) {
-        playerLevels[player.username] = level
-    }
-    fun load(player: Player): Int {
-        return playerLevels.getOrDefault(player.username, 0)
-    }
-}
-
 fun main() {
     val minecraftServer = MinecraftServer.init()
 

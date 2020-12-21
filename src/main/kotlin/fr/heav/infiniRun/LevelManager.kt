@@ -2,9 +2,11 @@ package fr.heav.infiniRun
 
 import com.extollit.linalg.mutable.Vec2d
 import net.minestom.server.MinecraftServer
+import net.minestom.server.entity.Player
 import net.minestom.server.instance.block.Block
 import net.minestom.server.utils.BlockPosition
 import net.minestom.server.utils.time.TimeUnit
+import kotlin.math.floor
 import kotlin.math.max
 
 object LevelManager {
