@@ -1,15 +1,11 @@
 package fr.heav.infiniRun
 
-import com.extollit.linalg.mutable.Vec2d
-import net.minestom.server.MinecraftServer
 import net.minestom.server.instance.InstanceContainer
 import net.minestom.server.instance.block.Block
 import net.minestom.server.utils.BlockPosition
 import net.minestom.server.utils.Position
-import net.minestom.server.utils.time.TimeUnit
 import net.minestom.server.world.DimensionType
 import java.util.*
-import kotlin.math.absoluteValue
 
 class LevelInstance(parkourConfig: ParkourGeneratorConfig, size: Int, dimensionType: DimensionType): InstanceContainer(UUID.randomUUID(), dimensionType, null) {
     val start = parkourConfig.startPosition.clone()

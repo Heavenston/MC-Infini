@@ -2,8 +2,6 @@ package fr.heav.infiniRun
 
 import com.extollit.linalg.mutable.Vec2d
 import net.minestom.server.instance.BlockModifier
-import net.minestom.server.instance.Instance
-import net.minestom.server.instance.batch.BlockBatch
 import net.minestom.server.instance.block.Block
 import net.minestom.server.utils.BlockPosition
 import kotlin.math.*

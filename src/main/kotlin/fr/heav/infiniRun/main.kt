@@ -1,27 +1,10 @@
 package fr.heav.infiniRun
 
-import com.extollit.linalg.mutable.Vec2d
 import net.minestom.server.MinecraftServer
-import net.minestom.server.chat.ChatColor
-import net.minestom.server.chat.ColoredText
 import net.minestom.server.entity.GameMode
-import net.minestom.server.entity.Player
-import net.minestom.server.event.player.PlayerDisconnectEvent
 import net.minestom.server.event.player.PlayerLoginEvent
-import net.minestom.server.event.player.PlayerSpawnEvent
-import net.minestom.server.instance.InstanceContainer
-import net.minestom.server.instance.block.Block
-import net.minestom.server.listener.manager.PacketController
-import net.minestom.server.network.packet.server.ServerPacket
-import net.minestom.server.network.packet.server.play.ChunkDataPacket
-import net.minestom.server.network.packet.server.play.UnloadChunkPacket
-import net.minestom.server.scoreboard.Sidebar
-import net.minestom.server.utils.BlockPosition
-import net.minestom.server.utils.Position
 import net.minestom.server.utils.time.TimeUnit
-import net.minestom.server.world.DimensionType
 import net.minestom.server.world.biomes.Biome
-import java.util.*
 import kotlin.math.*
 
 fun main() {
