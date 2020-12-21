@@ -4,7 +4,16 @@ import net.minestom.server.MinecraftServer
 import net.minestom.server.entity.GameMode
 import net.minestom.server.event.player.PlayerLoginEvent
 import net.minestom.server.utils.time.TimeUnit
-import kotlin.math.*
+import redis.clients.jedis.Jedis
+import redis.clients.jedis.JedisPool
+import redis.clients.jedis.JedisPoolConfig
+import kotlin.math.absoluteValue
+import kotlin.math.floor
+
+val jedisPool = JedisPool(
+        JedisPoolConfig(),
+        "localhost"
+)
 
 fun main() {
     val minecraftServer = MinecraftServer.init()

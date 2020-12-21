@@ -25,4 +25,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
 
     compile 'com.github.Minestom:Minestom:2a78851ab4'
+    compile 'redis.clients:jedis:3.3.0'
 }
