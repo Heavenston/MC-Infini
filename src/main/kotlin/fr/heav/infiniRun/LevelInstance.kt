@@ -21,11 +21,13 @@ class LevelInstance(parkourConfig: ParkourGeneratorConfig, size: Int, dimensionT
         this.timeRate = 0
         this.time = 18000
         this.loadChunk(start.toPosition(), null)
+
         val parkourGenerator = ParkourGenerator(this, parkourConfig)
         for (i in 0..size) {
             parkourGenerator.step(Block.BONE_BLOCK)
         }
         parkourGenerator.step(Block.GREEN_WOOL)
+
         end = parkourGenerator.getCurrentPosition()
         this.setBlock(start, Block.RED_WOOL)
     }

@@ -1,7 +1,9 @@
 package fr.heav.infiniRun
 
 import com.extollit.linalg.mutable.Vec2d
+import net.minestom.server.instance.BlockModifier
 import net.minestom.server.instance.Instance
+import net.minestom.server.instance.batch.BlockBatch
 import net.minestom.server.instance.block.Block
 import net.minestom.server.utils.BlockPosition
 import kotlin.math.*
@@ -24,7 +26,7 @@ data class ParkourGeneratorConfig (
     val fiveBlockDistanceProbability: Double = 0.0,
 )
 
-class ParkourGenerator(val instance: Instance, val config: ParkourGeneratorConfig) {
+class ParkourGenerator(val blockModifier: BlockModifier, val config: ParkourGeneratorConfig) {
     private val currentPosition: BlockPosition = BlockPosition(
         config.startPosition.x,
         config.startPosition.y,
@@ -44,18 +46,25 @@ class ParkourGenerator(val instance: Instance, val config: ParkourGeneratorConfi
         move.normalize()
 
         val heightChange = Random.nextInt(0, if (config.heightChange) 2 else 1)
+        val fiveBlockDistance = Random.nextFloat() < config.fiveBlockDistanceProbability
         val gapSize = if (heightChange == 1) {
-            random.nextDouble(3.0, 5.0)
+            random.nextDouble(
+                    3.0,
+                    if (fiveBlockDistance) 4.5 else 4.0
+            )
         }
         else {
-            random.nextDouble(3.0, 4.0)
+            random.nextDouble(
+                    3.0,
+                    if (fiveBlockDistance) 6.0 else 5.0
+            )
         }
         move.mul(gapSize)
         currentPosition.x += move.x.toInt()
         currentPosition.z += move.y.toInt()
         currentPosition.y += heightChange
 
-        instance.setBlock(currentPosition, block)
+        blockModifier.setBlock(currentPosition, block)
     }
 
     fun getCurrentPosition(): BlockPosition {
