@@ -12,6 +12,7 @@ import net.minestom.server.event.player.PlayerDisconnectEvent
 import net.minestom.server.event.player.PlayerLoginEvent
 import net.minestom.server.event.player.PlayerSpawnEvent
 import net.minestom.server.network.packet.server.play.CombatEventPacket
+import net.minestom.server.utils.Vector
 import net.minestom.server.utils.time.TimeUnit
 import redis.clients.jedis.Jedis
 import redis.clients.jedis.JedisPool
@@ -39,7 +40,9 @@ fun main() {
         var levelIndex = PlayerLevelStore.load(player)
 
         event.setSpawningInstance(LevelManager.getLevel(levelIndex))
-        player.respawnPoint = LevelManager.getLevel(levelIndex).start.toPosition().add(0f, 1f, 0f)
+        player.respawnPoint = LevelManager.getLevel(levelIndex).start.toPosition()
+                .add(0f, 1f, 0f)
+                .setDirection(Vector(1f, 0f, 0f))
         player.gameMode = GameMode.ADVENTURE
 
         MinecraftServer.getSchedulerManager().buildTask {
@@ -50,13 +53,23 @@ fun main() {
                 PlayerLevelStore.store(player, levelIndex)
                 val newLevel = LevelManager.getLevel(levelIndex)
                 newLevel.loadChunk(player.position, null)
-                player.respawnPoint = newLevel.start.toPosition().add(0f, 1f, 0f)
+                player.respawnPoint = newLevel.start.toPosition()
+                        .add(0f, 1f, 0f)
+                        .setDirection(Vector(1f, 0f, 0f))
                 val newPos = player.respawnPoint.clone()
                 newPos.yaw = player.position.yaw
                 newPos.pitch = player.position.pitch
                 newPos.x += player.position.x - floor(player.position.x)
                 newPos.z += player.position.z - floor(player.position.z)
                 player.setInstance(newLevel, newPos)
+            }
+            if (player.instance != null && position.y < 13) {
+                player.velocity = Vector(0f, 0f, 0f)
+                player.teleport(player.respawnPoint)
+                MinecraftServer.getConnectionManager().broadcastMessage(
+                        ColoredText.of(player.username)
+                                .append(ChatColor.RED, " just fell at level ${levelIndex + 1}")
+                )
             }
         }.repeat(3, TimeUnit.TICK).schedule()
     }

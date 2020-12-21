@@ -29,6 +29,6 @@ class LevelInstance(parkourConfig: ParkourGeneratorConfig, size: Int, dimensionT
     }
 
     override fun isInVoid(position: Position): Boolean {
-        return position.y < 14
+        return false
     }
 }
